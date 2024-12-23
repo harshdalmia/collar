@@ -1,0 +1,28 @@
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone_number VARCHAR(15)
+);
+CREATE TABLE dogs (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMP NOT NULL,
+    ambient_temp FLOAT,
+    object_temp FLOAT,
+    accel_x FLOAT,
+    accel_y FLOAT,
+    accel_z FLOAT,
+    gyro_x FLOAT,
+    gyro_y FLOAT,
+    gyro_z FLOAT,
+    mpu_temp FLOAT,
+    ir_value INT,
+    bpm FLOAT,
+    avg_bpm FLOAT
+);
+CREATE TABLE collars (
+    id SERIAL PRIMARY KEY,
+    dog_id INT REFERENCES dogs(id) ON DELETE CASCADE,  
+    macaddress VARCHAR(17) UNIQUE NOT NULL
+);
+
