@@ -1,16 +1,13 @@
-import pg from "pg";
-import env from "dotenv";
+import pkg from 'pg';
 
-env.config();
+const { Pool } = pkg;
+import dotenv from 'dotenv';
 
-const db = new pg.Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  ssl:false,
+dotenv.config();
+
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
-db.connect();
-export{ db};
+export {db}; 
