@@ -2,9 +2,20 @@ CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    phone_number VARCHAR(15)
+    phone_number VARCHAR(15),
+    dog_type INT REFERENCES dogs(id),
+    collar_id INT REFERENCES collars(id)
 );
 CREATE TABLE dogs (
+    id SERIAL PRIMARY KEY,
+   breed VARCHAR(255) NOT NULL,
+   metabolic_rate INT NOT NULL 
+);
+CREATE TABLE collars (
+    id SERIAL PRIMARY KEY, 
+    macaddress VARCHAR(17) UNIQUE NOT NULL
+);
+CREATE TABLE collar_log(
     id SERIAL PRIMARY KEY,
     timestamp TIMESTAMP NOT NULL,
     ambient_temp FLOAT,
@@ -18,11 +29,7 @@ CREATE TABLE dogs (
     mpu_temp FLOAT,
     ir_value INT,
     bpm FLOAT,
-    avg_bpm FLOAT
-);
-CREATE TABLE collars (
-    id SERIAL PRIMARY KEY,
-    dog_id INT REFERENCES dogs(id) ON DELETE CASCADE,  
-    macaddress VARCHAR(17) UNIQUE NOT NULL
-);
+    avg_bpm FLOAT,
+    macaddress VARCHAR(17)  NOT NULL
+)
 
